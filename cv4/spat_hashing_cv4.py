@@ -84,3 +84,26 @@ X, Y, Z = loadPoints('tree_18.txt')
 
 #Draw points
 drawPoints(X, Y, Z, 0, 0.2)
+
+
+
+class KDNode:
+
+    def __init__(self, point=None, axis=None, left=None, right=None, point_indices=None):
+    
+        self.point = point
+        self.axis = axis
+        self.left = left
+        self.right = right
+        self.point_indices = point_indices
+        
+        
+class KDTree:
+
+    def __init__(self, data):
+        
+        self.data = array(data)  # Ensure data is a NumPy array
+        self.root = None
+        
+    def _build_tree(self, idxs, depth):
+        pass
