@@ -3,20 +3,21 @@ from time import *
 from matplotlib.pyplot import *
 from numpy import * 
 from collections import defaultdict
-from scipy.spatial import cKDTree
+from sklearn.neighbors import KDTree
 import datetime
+from numpy.linalg import *
+
+
 
 def loadPoints(file):
     #Load file
     X, Y, Z = [], [], [] ;
     
     with open(file) as f:
-        #Process lines
+        
         for line in f:
-            #Split line
             x, y, z = line.split('\t')
             
-            #Add coordinates
             X.append(float(x))
             Y.append(float(y))
             Z.append(float(z))
@@ -29,7 +30,6 @@ def getNN(xq, yq, zq, X, Y, Z):
     dmin = inf
     xn, yn, zn = X[0], Y[0], Z[0]
     
-    #Process all points
     for i in range(len(X)):
         #Compute distance
         dx, dy, dz = xq - X[i], yq - Y[i], zq - Z[i]
@@ -76,11 +76,11 @@ def drawVoxels(x_min, y_min, z_min, dx, dy, dz, V):
     ax.voxels(VX, VY, VZ, V, edgecolor='k')
     
     show()
-        
+    
 
 #Load points
+#X, Y, Z = loadPoints('s:/K155/Public/155YGEI/cv12/tree_18.txt')
 X, Y, Z = loadPoints('tree_18.txt')
 
 #Draw points
 drawPoints(X, Y, Z, 0, 0.2)
-
